@@ -29,18 +29,17 @@ env/
 ENV/
 env.bak/
 venv.bak/
+.venv/
 
 # PyInstaller
-#  Обычно эти файлы создаются Python-скриптом из шаблона
-#  перед сборкой exe, чтобы вставить дату/другую информацию.
 *.manifest
 *.spec
 
-# Логи установщика
+# Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Отчеты по тестированию / покрытию кода
+# Test and coverage reports
 htmlcov/
 .tox/
 .nox/
@@ -55,7 +54,7 @@ coverage.xml
 .pytest_cache/
 cover/
 
-# Переводы
+# Translations
 *.mo
 *.pot
 
@@ -71,7 +70,7 @@ instance/
 # Scrapy stuff:
 .scrapy
 
-# Документация Sphinx
+# Sphinx documentation
 docs/_build/
 
 # PyBuilder
@@ -94,23 +93,20 @@ celerybeat-schedule
 .env
 .env.*
 
-# virtualenv
-.venv/
-
-# Настройки проекта Spyder
+# Settings for Spyder project
 .spyderproject
 .spyproject
 
-# Настройки проекта Rope
+# Settings for Rope project
 .ropeproject
 
-# IDEs и редакторы
+# IDEs and editors
 .vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
 
-# MacOS
+# macOS
 .DS_Store
 
 # Windows
@@ -118,7 +114,7 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# Другие файлы
+# Other temporary files
 *.bak
 *.tmp
 *.swp
