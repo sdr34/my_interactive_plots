@@ -1,0 +1,15 @@
+LICENSE
+README.md
+setup.py
+my_interactive_plots/__init__.py
+my_interactive_plots/config.py
+my_interactive_plots/data_loader.py
+my_interactive_plots/plots.py
+my_interactive_plots/utils.py
+my_interactive_plots.egg-info/PKG-INFO
+my_interactive_plots.egg-info/SOURCES.txt
+my_interactive_plots.egg-info/dependency_links.txt
+my_interactive_plots.egg-info/requires.txt
+my_interactive_plots.egg-info/top_level.txt
+tests/__init__.py
+tests/test_plots.py
