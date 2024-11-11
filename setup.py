@@ -9,6 +9,12 @@ setup(
         'plotly',
         'click'
     ],
+    extras_require={
+        'dev': [
+            'pytest',
+            'click',
+        ],
+    },
     entry_points={
         'console_scripts': [
             'myplot=my_interactive_plots.cli:cli'

@@ -1,3 +1,5 @@
+# tests/test_cli.py
+
 import unittest
 from click.testing import CliRunner
 from my_interactive_plots.cli import cli
@@ -12,10 +14,27 @@ class TestCLI(unittest.TestCase):
         self.assertEqual(result.exit_code, 0)
         self.assertIn('Scatter plot created successfully.', result.output)
     
+    def test_cli_line_plot(self):
+        result = self.runner.invoke(cli, [self.data_path, '--plot-type', 'line'])
+        self.assertEqual(result.exit_code, 0)
+        self.assertIn('Line plot created successfully.', result.output)
+    
+    def test_cli_histogram_plot(self):
+        result = self.runner.invoke(cli, [self.data_path, '--plot-type', 'histogram'])
+        self.assertEqual(result.exit_code, 0)
+        self.assertIn('Histogram plot created successfully.', result.output)
+    
+    def test_cli_box_plot(self):
+        result = self.runner.invoke(cli, [self.data_path, '--plot-type', 'box'])
+        self.assertEqual(result.exit_code, 0)
+        self.assertIn('Box plot created successfully.', result.output)
+    
     def test_cli_invalid_plot_type(self):
         result = self.runner.invoke(cli, [self.data_path, '--plot-type', 'invalid'])
         self.assertNotEqual(result.exit_code, 0)
-        self.assertIn('Error: Invalid value for "--plot-type"', result.output)
+        # Обновляем ожидаемую строку с учётом одинарных кавычек
+        self.assertIn("Invalid value for '--plot-type'", result.output)
 
 if __name__ == '__main__':
     unittest.main()
+
