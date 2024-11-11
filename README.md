@@ -1,8 +1,8 @@
 # My Interactive Plots
 
-[![PyPI version](https://badge.fury.io/py/my_interactive_plots.svg)](https://badge.fury.io/py/my_interactive_plots)
+[![PyPI version](https://badge.fury.io/py/my-interactive-plots.svg)](https://badge.fury.io/py/my-interactive-plots)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Build Status](https://github.com/yourusername/my_interactive_plots/actions/workflows/python-app.yml/badge.svg)](https://github.com/yourusername/my_interactive_plots/actions)
+[![Build Status](https://github.com/sdr34/my_interactive_plots/actions/workflows/python-app.yml/badge.svg)](https://github.com/sdr34/my_interactive_plots/actions)
 
 A Python package for creating interactive plots using Plotly. Supports various plot types and includes a Command-Line Interface (CLI) for ease of use.
 
@@ -30,7 +30,7 @@ Ensure you have **Python 3.6+** installed.
 You can install the package directly from PyPI:
 
 ```bash
-pip install my_interactive_plots
+pip install my-interactive-plots
 ```
 ## From Source
 

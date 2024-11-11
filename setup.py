@@ -1,11 +1,13 @@
-from setuptools import setup, find_packages # type: ignore
+from setuptools import setup, find_packages
+import pathlib
 
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
+HERE = pathlib.Path(__file__).parent.resolve()
+
+README = (HERE / "README.md").read_text(encoding="utf-8")
 
 setup(
     name='my_interactive_plots',
-    version='0.1.0',
+    version='0.1.2',
     packages=find_packages(),
     include_package_data=True,
    install_requires=[
@@ -22,6 +24,8 @@ setup(
     author='Dmitry Gorschkov',
     author_email='dmgorschkov@mail.ru',
     description='A package for creating interactive plots.',
+    long_description=README,
+    long_description_content_type='text/markdown', 
     url='https://github.com/sdr34/my_interactive_plots',
     classifiers=[
         'Programming Language :: Python :: 3',
