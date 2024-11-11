@@ -6,12 +6,18 @@ setup(
     packages=find_packages(),
     install_requires=[
         'pandas',
-        'plotly'
+        'plotly',
+        'click'
     ],
+    entry_points={
+        'console_scripts': [
+            'myplot=my_interactive_plots.cli:cli'
+        ],
+    },
     author='Dmitry Gorschkov',
     author_email='dmgorschkov@mail.ru',
     description='A package for creating interactive plots.',
-    url='https://github.com/yourusername/my_interactive_plots',
+    url='https://github.com/sdr34/my_interactive_plots',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',

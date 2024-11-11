@@ -1,3 +1,5 @@
+# my_interactive_plots/config.py
+
 class Config:
     """
     Configuration settings for plots.
