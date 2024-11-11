@@ -1,0 +1,3 @@
+include README.md
+include LICENSE
+include my_interactive_plots/data/*.csv

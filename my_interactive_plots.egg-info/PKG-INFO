@@ -1,26 +1,18 @@
 Metadata-Version: 2.1
 Name: my_interactive_plots
 Version: 0.1.0
-Summary: Библиотека для создания интерактивных графиков и диаграмм
-Home-page: https://github.com/yourusername/my_interactive_plots
-Author: Ваше Имя
-Author-email: your.email@example.com
+Summary: A package for creating interactive plots.
+Home-page: https://github.com/sdr34/my_interactive_plots
+Author: Dmitry Gorschkov
+Author-email: dmgorschkov@mail.ru
 Classifier: Programming Language :: Python :: 3
-Classifier: Intended Audience :: Developers
-Classifier: Operating System :: OS Independent
 Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
-Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: pandas>=1.0.0
 Requires-Dist: plotly>=5.0.0
-
-# My Interactive Plots
-
-Библиотека для создания интерактивных графиков и диаграмм на Python с использованием Plotly.
-
-## Установка
-
-```bash
-pip install my_interactive_plots
-
+Requires-Dist: click>=8.0.0
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: click; extra == "dev"
