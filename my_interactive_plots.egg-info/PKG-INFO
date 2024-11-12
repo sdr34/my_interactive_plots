@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: my_interactive_plots
-Version: 0.1.2
+Version: 0.1.3
 Summary: A package for creating interactive plots.
 Home-page: https://github.com/sdr34/my_interactive_plots
 Author: Dmitry Gorschkov
@@ -20,6 +20,8 @@ Requires-Dist: click; extra == "dev"
 
 # My Interactive Plots
 
+[![Downloads](https://static.pepy.tech/personalized-badge/my-interactive-plots?period=total&units=international_system&left_color=black&right_color=blue&left_text=Downloads)
+]
 [![PyPI version](https://badge.fury.io/py/my-interactive-plots.svg)](https://badge.fury.io/py/my-interactive-plots)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Build Status](https://github.com/sdr34/my_interactive_plots/actions/workflows/python-app.yml/badge.svg)](https://github.com/sdr34/my_interactive_plots/actions)
