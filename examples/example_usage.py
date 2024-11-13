@@ -1,18 +1,26 @@
 from my_interactive_plots import create_plot
 import pandas as pd
+from pathlib import Path
 
 def main():
-    data_path = 'data/iris.csv'  # Path to your CSV or Excel data file
-    plot_type = 'scatter'        # Choose from 'scatter', 'line', 'histogram', 'box', '3d_scatter', 'geo_map'
+    current_dir = Path(__file__).parent
+    data_path = current_dir.parent / 'data' / 'iris.csv'
     
-    # Load data
+    plot_type = 'scatter'
+    
+    if not data_path.exists():
+        print(f"Data file not found at path: {data_path}")
+        return
+    
     data = pd.read_csv(data_path)
+
+    if plot_type == 'animated_scatter':
+        fig = create_plot(data, plot_type=plot_type, animation_frame='species')
+    else:
+        fig = create_plot(data, plot_type=plot_type)
     
-    # Create plot
-    fig = create_plot(data, plot_type=plot_type)
-    
-    # Show plot
     fig.show()
 
 if __name__ == "__main__":
     main()
+
