@@ -1,17 +1,15 @@
+# my_interactive_plots/utils.py
+
 import logging
 
 def setup_logging():
     """
-    Configures the logging for the package.
+    Configures logging for the package.
     """
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     )
+    logger = logging.getLogger('my_interactive_plots')
+    return logger
 
-
-def helper_function():
-    """
-    A helper function for utility purposes.
-    """
-    pass  # Implement utility functionality here

@@ -1,17 +1,18 @@
-# examples/example_usage.py
-
 from my_interactive_plots import create_plot
+import pandas as pd
 
 def main():
-    """
-    Example usage of the my_interactive_plots package.
-    """
-    data_path = 'data/iris.csv'  # Replace with your data path
-    plot_types = ['scatter', 'line', 'histogram', 'box']
+    data_path = 'data/iris.csv'  # Path to your CSV or Excel data file
+    plot_type = 'scatter'        # Choose from 'scatter', 'line', 'histogram', 'box', '3d_scatter', 'geo_map'
     
-    for plot_type in plot_types:
-        fig = create_plot(data_path, plot_type=plot_type)
-        fig.show(title=f"{plot_type.capitalize()} Plot")
+    # Load data
+    data = pd.read_csv(data_path)
+    
+    # Create plot
+    fig = create_plot(data, plot_type=plot_type)
+    
+    # Show plot
+    fig.show()
 
 if __name__ == "__main__":
     main()
