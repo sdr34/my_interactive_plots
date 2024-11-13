@@ -14,6 +14,8 @@ setup(
         'pandas>=1.0.0',
         'plotly>=5.0.0',
         'click>=8.0.0',
+        'requests>=2.25.0',
+        'sqlalchemy>=1.4.0',  
     ],
     extras_require={
         'dev': [
