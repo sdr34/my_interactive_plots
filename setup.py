@@ -7,13 +7,15 @@ README = (HERE / "README.md").read_text(encoding="utf-8")
 
 setup(
     name='my_interactive_plots',
-    version='0.1.4',
+    version='0.1.5',
     packages=find_packages(),
     include_package_data=True,
    install_requires=[
         'pandas>=1.0.0',
         'plotly>=5.0.0',
         'click>=8.0.0',
+        'requests>=2.25.0',
+        'sqlalchemy>=1.4.0',  
     ],
     extras_require={
         'dev': [
