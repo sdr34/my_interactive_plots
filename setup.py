@@ -7,7 +7,7 @@ README = (HERE / "README.md").read_text(encoding="utf-8")
 
 setup(
     name='my_interactive_plots',
-    version='0.1.5',
+    version='0.1.6',
     packages=find_packages(),
     include_package_data=True,
    install_requires=[

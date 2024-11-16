@@ -17,7 +17,7 @@ def generate_report(data: pd.DataFrame, plot_types: list, output_file: str):
         for plot_type in plot_types:
             fig = create_plot(data, plot_type)
             # Use correct types for the include_plotlyjs parameter
-            plot_html = pio.to_html(fig, include_plotlyjs='cdn', full_html=False)
+            plot_html = pio.to_html(fig, include_plotlyjs='cdn', full_html=False) # type: ignore
             f.write(f"<h2>{plot_type.capitalize()} Plot</h2>")
             f.write(plot_html)
         f.write("</body></html>")
