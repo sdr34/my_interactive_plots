@@ -1,5 +1,3 @@
-# my_interactive_plots/__init__.py
-
 from .plots import (
     create_plot,
     create_scatter_plot,

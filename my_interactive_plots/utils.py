@@ -1,5 +1,3 @@
-# my_interactive_plots/utils.py
-
 import logging
 
 def setup_logging():
