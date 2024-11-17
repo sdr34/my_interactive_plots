@@ -1,38 +1,60 @@
-import plotly.io as pio
+import logging
 import pandas as pd
-from .plots import create_plot
+from weasyprint import HTML
+from .utils import setup_logging
 
-def generate_report(data: pd.DataFrame, plot_types: list, output_file: str):
+# Configure logging
+setup_logging()
+logger = logging.getLogger(__name__)
+
+def generate_report(data: pd.DataFrame, plot_types: list, report_file: str):
     """
-    Generates an HTML report with multiple plots.
+    Generates an HTML report with the specified plots.
 
     Args:
-        data (pd.DataFrame): DataFrame containing the data.
-        plot_types (list): List of plot types to include in the report.
-        output_file (str): Path to save the HTML report.
+        data (pd.DataFrame): The data to include in the report.
+        plot_types (list): List of plot types to include.
+        report_file (str): Path to save the report.
     """
-    with open(output_file, 'w') as f:
-        f.write("<html><head><title>Report</title></head><body>")
-        f.write("<h1>Data Report</h1>")
+    logger.info("Generating report")
+    try:
+        from .plots import create_plot  # Import here to allow mocking during tests
+        
+        html_content = "<html><head><title>Data Report</title></head><body>"
+        html_content += "<h1>Data Report</h1>"
+
         for plot_type in plot_types:
             fig = create_plot(data, plot_type)
-            # Use correct types for the include_plotlyjs parameter
-            plot_html = pio.to_html(fig, include_plotlyjs='cdn', full_html=False) # type: ignore
-            f.write(f"<h2>{plot_type.capitalize()} Plot</h2>")
-            f.write(plot_html)
-        f.write("</body></html>")
+            fig_html = fig.to_html(full_html=False)
+            html_content += f"<h2>{plot_type.capitalize()} Plot</h2>"
+            html_content += fig_html
 
-def generate_profile_report(data: pd.DataFrame, output_file: str):
+        html_content += "</body></html>"
+
+        HTML(string=html_content).write_pdf(report_file)
+        logger.info(f"Report saved to {report_file}")
+    except Exception as e:
+        logger.error(f"Failed to generate report: {e}")
+        raise
+
+def generate_profile_report(data: pd.DataFrame, profile_file: str):
     """
-    Generates a descriptive data report using pandas_profiling.
+    Generates a data profile report.
 
     Args:
-        data (pd.DataFrame): DataFrame containing the data.
-        output_file (str): Path to save the HTML profile report.
+        data (pd.DataFrame): The data to profile.
+        profile_file (str): Path to save the profile report.
     """
-    from pandas_profiling import ProfileReport
-    
-    profile = ProfileReport(data, title="Data Profiling Report", explorative=True)
-    profile.to_file(output_file)
+    logger.info("Generating profile report")
+    try:
+        import pandas_profiling
+
+        profile = pandas_profiling.ProfileReport(data, title="Data Profile Report")
+        profile.to_file(profile_file)
+        logger.info(f"Data profile report saved to {profile_file}")
+    except Exception as e:
+        logger.error(f"Failed to generate profile report: {e}")
+        raise
+
 
 

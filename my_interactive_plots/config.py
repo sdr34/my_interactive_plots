@@ -1,6 +1,6 @@
+# my_interactive_plots/config.py
+
 import json
-import pathlib
-from typing import Any
 
 class Config:
     """

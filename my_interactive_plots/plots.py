@@ -1,5 +1,3 @@
-# my_interactive_plots/plots.py
-
 import logging
 import pandas as pd
 import plotly.express as px
@@ -156,6 +154,11 @@ def create_geographical_map(data: pd.DataFrame) -> go.Figure:
     logger.info("Creating geographical map")
     config = Config()
     try:
+        required_columns = [config.latitude_column, config.longitude_column]
+        for col in required_columns:
+            if col not in data.columns:
+                raise ValueError(f"Missing required column '{col}' for geographical map.")
+        
         fig = px.scatter_geo(
             data,
             lat=config.latitude_column,
@@ -225,6 +228,9 @@ def create_animated_scatter_plot(data: pd.DataFrame, animation_frame: str) -> go
     logger.info("Creating animated scatter plot")
     config = Config()
     try:
+        if animation_frame not in data.columns:
+            raise ValueError(f"Animation frame column '{animation_frame}' does not exist in the data.")
+        
         fig = px.scatter(
             data,
             x=config.x_column,

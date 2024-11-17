@@ -1,22 +1,18 @@
 import pandas as pd
 import sqlalchemy
+from pandas.errors import DataError
+from .exceptions import PlotCreationError
 
-def load_data(data_source: str) -> pd.DataFrame:
-    """
-    Loads data from a CSV or Excel file into a DataFrame.
-
-    Args:
-        data_source (str): Path to the data file.
-
-    Returns:
-        pd.DataFrame: Loaded data.
-    """
-    if data_source.endswith('.csv'):
-        return pd.read_csv(data_source)
-    elif data_source.endswith(('.xls', '.xlsx')):
-        return pd.read_excel(data_source)
-    else:
-        raise ValueError("Unsupported file format. Please use CSV or Excel files.")
+def load_data(file_path: str) -> pd.DataFrame:
+    try:
+        data = pd.read_csv(file_path)
+        return data
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Data source not found: {file_path}")
+    except DataError:
+        raise PlotCreationError(f"Error parsing the data file: {file_path}")
+    except Exception as e:
+        raise PlotCreationError(f"An error occurred while loading data: {e}") from e
 
 def load_data_from_db(connection_string: str, query: str) -> pd.DataFrame:
     """
