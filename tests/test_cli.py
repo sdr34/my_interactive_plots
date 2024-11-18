@@ -113,7 +113,7 @@ class TestCLI(unittest.TestCase):
     def test_cli_generate_profile_report_success(self, mock_generate_profile_report):
         mock_generate_profile_report.return_value = None  # Assume success
         with self.runner.isolated_filesystem():
-            # Копируем iris.csv в изолированную файловую систему
+            # Копируем iris.csv в изолированную файловую систему ok
             os.system(f'cp {self.valid_data_path} ./iris.csv')
             result = self.runner.invoke(cli, [
                 'iris.csv',
