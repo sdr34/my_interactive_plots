@@ -104,7 +104,7 @@ class TestCLI(unittest.TestCase):
                 'iris.csv',
                 '--plot-type', 'scatter',
                 '--save-report',
-                '--output', 'report.txt'  # Unsupported format
+                '--output', 'report.txt'
             ])
             self.assertNotEqual(result.exit_code, 0)
             self.assertIn('Error: Unsupported export format.', result.output)
