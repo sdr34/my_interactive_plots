@@ -14,4 +14,4 @@ from .config import Config
 from .utils import setup_logging
 from .cli import cli
 from .report_generator import generate_report
-from .web_app import app  # If you intend to run the Dash app via import
+from .web_app import app
