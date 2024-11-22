@@ -26,7 +26,6 @@ def cli(data_source, plot_type, output, export_format, filter_column, filter_val
     DATA_SOURCE: Path to the data file (CSV, Excel, JSON).
     """
     try:
-        # Load data
         data = load_data(data_source)
         config = Config()
         config.theme = theme
@@ -35,22 +34,19 @@ def cli(data_source, plot_type, output, export_format, filter_column, filter_val
                 raise ValueError(f"Filter column '{filter_column}' does not exist in the data.")
             data = data[data[filter_column] == filter_value]
         
-        # Create plot
         if plot_type == 'animated_scatter':
-            animation_frame = 'animation_frame'  # Ensure this column exists in data
+            animation_frame = 'animation_frame' 
             if animation_frame not in data.columns:
                 raise ValueError(f"Animation frame column '{animation_frame}' does not exist in the data.")
             fig = create_plot(data, plot_type, animation_frame=animation_frame)
         else:
             fig = create_plot(data, plot_type)
         
-        # Generate profile report if needed
         if generate_profile:
             profile_file = output if output else 'profile_report.html'
             generate_profile_report(data, profile_file)
             click.echo(f"Data profile report saved to {profile_file}")
         
-        # Save report or plot
         if save_report:
             report_file = output if output else 'report.html'
             generate_report(data, [plot_type], report_file)
