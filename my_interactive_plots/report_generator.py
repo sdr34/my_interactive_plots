@@ -3,7 +3,6 @@ import pandas as pd
 from weasyprint import HTML
 from .utils import setup_logging
 
-# Configure logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
@@ -18,7 +17,7 @@ def generate_report(data: pd.DataFrame, plot_types: list, report_file: str):
     """
     logger.info("Generating report")
     try:
-        from .plots import create_plot  # Import here to allow mocking during tests
+        from .plots import create_plot
         
         html_content = "<html><head><title>Data Report</title></head><body>"
         html_content += "<h1>Data Report</h1>"

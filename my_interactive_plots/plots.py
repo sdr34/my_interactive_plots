@@ -7,7 +7,6 @@ from .config import Config
 from .exceptions import PlotCreationError
 from .utils import setup_logging
 
-# Configure logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
@@ -188,7 +187,6 @@ def create_combined_plot(data: pd.DataFrame) -> go.Figure:
     try:
         fig = go.Figure()
 
-        # Add scatter plot
         fig.add_trace(go.Scatter(
             x=data[config.x_column],
             y=data[config.y_column],
@@ -196,7 +194,6 @@ def create_combined_plot(data: pd.DataFrame) -> go.Figure:
             name='Scatter'
         ))
 
-        # Add line plot (rolling mean)
         fig.add_trace(go.Scatter(
             x=data[config.x_column],
             y=data[config.y_column].rolling(window=5).mean(),
