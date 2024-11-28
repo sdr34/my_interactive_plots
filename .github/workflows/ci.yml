@@ -1,5 +1,3 @@
-# .github/workflows/ci.yml
-
 name: Continuous Integration
 
 on:
@@ -20,7 +18,7 @@ jobs:
     - name: Set Up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.12'  # Укажите используемую версию Python
+        python-version: '3.12.7' 
 
     - name: Cache pip
       uses: actions/cache@v3
@@ -39,4 +37,3 @@ jobs:
     - name: Run Tests
       run: |
         python -m unittest discover tests
-

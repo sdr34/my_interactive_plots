@@ -187,6 +187,7 @@ def create_combined_plot(data: pd.DataFrame) -> go.Figure:
     try:
         fig = go.Figure()
 
+        # Add scatter plot
         fig.add_trace(go.Scatter(
             x=data[config.x_column],
             y=data[config.y_column],
@@ -194,6 +195,7 @@ def create_combined_plot(data: pd.DataFrame) -> go.Figure:
             name='Scatter'
         ))
 
+        # Add line plot (rolling mean)
         fig.add_trace(go.Scatter(
             x=data[config.x_column],
             y=data[config.y_column].rolling(window=5).mean(),
@@ -207,6 +209,9 @@ def create_combined_plot(data: pd.DataFrame) -> go.Figure:
         )
 
         return fig
+    except KeyError as e:
+        logger.error(f"Failed to create combined plot: {e}")
+        raise PlotCreationError(f"Failed to create combined plot: {e}") from e
     except Exception as e:
         logger.error(f"Failed to create combined plot: {e}")
         raise PlotCreationError("Failed to create combined plot") from e

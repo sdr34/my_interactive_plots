@@ -2,7 +2,7 @@
 
 import unittest
 import pandas as pd
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from my_interactive_plots.plots import (
     create_plot,
     create_scatter_plot,
@@ -46,10 +46,18 @@ class TestPlots(unittest.TestCase):
 
     @patch('my_interactive_plots.plots.px.scatter')
     def test_create_scatter_plot_success(self, mock_scatter):
-        mock_scatter.return_value = 'FigureObject'
+        mock_fig = MagicMock()
+        mock_scatter.return_value = mock_fig
         fig = create_scatter_plot(self.data)
-        self.assertEqual(fig, 'FigureObject')
-        mock_scatter.assert_called_once()
+        self.assertEqual(fig, mock_fig)
+        mock_scatter.assert_called_once_with(
+            self.data, 
+            x='sepal_width', 
+            y='sepal_length', 
+            color='species',
+            title='Sepal Width vs Sepal Length',
+            template='plotly_dark'
+        )
 
     @patch('my_interactive_plots.plots.px.scatter')
     def test_create_scatter_plot_failure(self, mock_scatter):
@@ -57,13 +65,22 @@ class TestPlots(unittest.TestCase):
         invalid_data = self.data.drop(columns=['sepal_width'])
         with self.assertRaises(PlotCreationError):
             create_scatter_plot(invalid_data)
+        mock_scatter.assert_not_called()
 
     @patch('my_interactive_plots.plots.px.line')
     def test_create_line_plot_success(self, mock_line):
-        mock_line.return_value = 'LineFigureObject'
+        mock_fig = MagicMock()
+        mock_line.return_value = mock_fig
         fig = create_line_plot(self.data)
-        self.assertEqual(fig, 'LineFigureObject')
-        mock_line.assert_called_once()
+        self.assertEqual(fig, mock_fig)
+        mock_line.assert_called_once_with(
+            self.data,
+            x='sepal_width',
+            y='sepal_length',
+            color='species',
+            title='Sepal Width vs Sepal Length',
+            template='plotly_dark'
+        )
 
     @patch('my_interactive_plots.plots.px.line')
     def test_create_line_plot_failure(self, mock_line):
@@ -71,13 +88,21 @@ class TestPlots(unittest.TestCase):
         invalid_data = self.data.drop(columns=['sepal_width'])
         with self.assertRaises(PlotCreationError):
             create_line_plot(invalid_data)
+        mock_line.assert_not_called()
 
     @patch('my_interactive_plots.plots.px.histogram')
     def test_create_histogram_success(self, mock_histogram):
-        mock_histogram.return_value = 'HistogramFigureObject'
+        mock_fig = MagicMock()
+        mock_histogram.return_value = mock_fig
         fig = create_histogram(self.data)
-        self.assertEqual(fig, 'HistogramFigureObject')
-        mock_histogram.assert_called_once()
+        self.assertEqual(fig, mock_fig)
+        mock_histogram.assert_called_once_with(
+            self.data,
+            x='sepal_width',
+            color='species',
+            title='Sepal Width vs Sepal Length',
+            template='plotly_dark'
+        )
 
     @patch('my_interactive_plots.plots.px.histogram')
     def test_create_histogram_failure(self, mock_histogram):
@@ -85,13 +110,22 @@ class TestPlots(unittest.TestCase):
         invalid_data = self.data.drop(columns=['sepal_width'])
         with self.assertRaises(PlotCreationError):
             create_histogram(invalid_data)
+        mock_histogram.assert_not_called()
 
     @patch('my_interactive_plots.plots.px.box')
     def test_create_box_plot_success(self, mock_box):
-        mock_box.return_value = 'BoxFigureObject'
+        mock_fig = MagicMock()
+        mock_box.return_value = mock_fig
         fig = create_box_plot(self.data)
-        self.assertEqual(fig, 'BoxFigureObject')
-        mock_box.assert_called_once()
+        self.assertEqual(fig, mock_fig)
+        mock_box.assert_called_once_with(
+            self.data,
+            x='sepal_width',
+            y='sepal_length',
+            color='species',
+            title='Sepal Width vs Sepal Length',
+            template='plotly_dark'
+        )
 
     @patch('my_interactive_plots.plots.px.box')
     def test_create_box_plot_failure(self, mock_box):
@@ -99,13 +133,23 @@ class TestPlots(unittest.TestCase):
         invalid_data = self.data.drop(columns=['sepal_width'])
         with self.assertRaises(PlotCreationError):
             create_box_plot(invalid_data)
+        mock_box.assert_not_called()
 
     @patch('my_interactive_plots.plots.px.scatter_3d')
     def test_create_3d_scatter_plot_success(self, mock_scatter_3d):
-        mock_scatter_3d.return_value = '3DScatterFigureObject'
+        mock_fig = MagicMock()
+        mock_scatter_3d.return_value = mock_fig
         fig = create_3d_scatter_plot(self.data)
-        self.assertEqual(fig, '3DScatterFigureObject')
-        mock_scatter_3d.assert_called_once()
+        self.assertEqual(fig, mock_fig)
+        mock_scatter_3d.assert_called_once_with(
+            self.data, 
+            x='sepal_width', 
+            y='sepal_length', 
+            z='petal_length', 
+            color='species',
+            title='Sepal Width vs Sepal Length',
+            template='plotly_dark'
+        )
 
     @patch('my_interactive_plots.plots.px.scatter_3d')
     def test_create_3d_scatter_plot_failure(self, mock_scatter_3d):
@@ -113,13 +157,23 @@ class TestPlots(unittest.TestCase):
         invalid_data = self.data.drop(columns=['petal_length'])
         with self.assertRaises(PlotCreationError):
             create_3d_scatter_plot(invalid_data)
+        mock_scatter_3d.assert_not_called()
 
     @patch('my_interactive_plots.plots.px.scatter_geo')
     def test_create_geographical_map_success(self, mock_scatter_geo):
-        mock_scatter_geo.return_value = 'GeoMapFigureObject'
+        mock_fig = MagicMock()
+        mock_scatter_geo.return_value = mock_fig
         fig = create_geographical_map(self.geo_data)
-        self.assertEqual(fig, 'GeoMapFigureObject')
-        mock_scatter_geo.assert_called_once()
+        self.assertEqual(fig, mock_fig)
+        mock_scatter_geo.assert_called_once_with(
+            self.geo_data,
+            lat='latitude',
+            lon='longitude',
+            hover_name='species',
+            color='species',
+            title='Sepal Width vs Sepal Length',
+            template='plotly_dark'
+        )
 
     def test_create_geographical_map_failure_missing_latitude(self):
         # Удаляем столбец 'latitude'
@@ -134,13 +188,21 @@ class TestPlots(unittest.TestCase):
             create_geographical_map(invalid_data)
 
     @patch('my_interactive_plots.plots.go.Figure')
-    def test_create_combined_plot_success(self, mock_figure):
-        mock_figure.return_value = 'CombinedFigureObject'
+    def test_create_combined_plot_success(self, mock_figure_class):
+        mock_fig = MagicMock()
+        mock_figure_class.return_value = mock_fig
         fig = create_combined_plot(self.data)
-        self.assertEqual(fig, 'CombinedFigureObject')
-        mock_figure.assert_called_once()
+        self.assertEqual(fig, mock_fig)
+        mock_figure_class.assert_called_once_with()
+        # Проверяем, что add_trace был вызван дважды
+        self.assertEqual(mock_fig.add_trace.call_count, 2)
+        # Проверяем, что update_layout был вызван один раз
+        mock_fig.update_layout.assert_called_once_with(
+            title='Sepal Width vs Sepal Length',
+            template='plotly_dark'
+        )
 
-    def test_create_combined_plot_failure(self):
+    def test_create_combined_plot_failure_missing_x_column(self):
         # Удаляем обязательный столбец 'sepal_width' (x_column)
         invalid_data = self.data.drop(columns=['sepal_width'])
         with self.assertRaises(PlotCreationError):
@@ -148,31 +210,45 @@ class TestPlots(unittest.TestCase):
 
     @patch('my_interactive_plots.plots.px.scatter')
     def test_create_animated_scatter_plot_success(self, mock_scatter):
-        mock_scatter.return_value = 'AnimatedScatterFigureObject'
+        mock_fig = MagicMock()
+        mock_scatter.return_value = mock_fig
         fig = create_animated_scatter_plot(self.animated_data, 'animation_frame')
-        self.assertEqual(fig, 'AnimatedScatterFigureObject')
-        mock_scatter.assert_called_once()
+        self.assertEqual(fig, mock_fig)
+        mock_scatter.assert_called_once_with(
+            self.animated_data,
+            x='sepal_width',
+            y='sepal_length',
+            color='species',
+            animation_frame='animation_frame',
+            title='Sepal Width vs Sepal Length',
+            template='plotly_dark'
+        )
 
     @patch('my_interactive_plots.plots.px.scatter')
     def test_create_animated_scatter_plot_failure_missing_animation_frame(self, mock_scatter):
         # Убедитесь, что столбца 'animation_frame' нет
         with self.assertRaises(PlotCreationError):
             create_animated_scatter_plot(self.data, 'animation_frame')
+        mock_scatter.assert_not_called()
 
-    @patch('my_interactive_plots.plots.px.scatter')
-    @patch('my_interactive_plots.plots.px.line')
-    @patch('my_interactive_plots.plots.px.histogram')
-    @patch('my_interactive_plots.plots.px.box')
-    @patch('my_interactive_plots.plots.px.scatter_3d')
-    @patch('my_interactive_plots.plots.px.scatter_geo')
-    def test_create_plot_valid_types(self, mock_scatter_geo, mock_scatter_3d, mock_box, mock_histogram, mock_line, mock_scatter):
-        # Mock all plot functions to return 'FigureObject'
-        mock_scatter.return_value = 'ScatterFigureObject'
-        mock_line.return_value = 'LineFigureObject'
-        mock_histogram.return_value = 'HistogramFigureObject'
-        mock_box.return_value = 'BoxFigureObject'
-        mock_scatter_3d.return_value = '3DScatterFigureObject'
-        mock_scatter_geo.return_value = 'GeoMapFigureObject'
+    @patch('my_interactive_plots.plots.create_geographical_map')
+    @patch('my_interactive_plots.plots.create_3d_scatter_plot')
+    @patch('my_interactive_plots.plots.create_box_plot')
+    @patch('my_interactive_plots.plots.create_histogram')
+    @patch('my_interactive_plots.plots.create_line_plot')
+    @patch('my_interactive_plots.plots.create_scatter_plot')
+    @patch('my_interactive_plots.plots.create_combined_plot')
+    @patch('my_interactive_plots.plots.create_animated_scatter_plot')
+    def test_create_plot_valid_types(self, mock_animated_scatter, mock_combined_plot, mock_scatter_plot, mock_line_plot, mock_histogram, mock_box_plot, mock_3d_scatter_plot, mock_geographical_map):
+        # Устанавливаем моки
+        mock_scatter_plot.return_value = MagicMock()
+        mock_line_plot.return_value = MagicMock()
+        mock_histogram.return_value = MagicMock()
+        mock_box_plot.return_value = MagicMock()
+        mock_3d_scatter_plot.return_value = MagicMock()
+        mock_geographical_map.return_value = MagicMock()
+        mock_combined_plot.return_value = MagicMock()
+        mock_animated_scatter.return_value = MagicMock()
 
         plot_types = [
             'scatter',
@@ -188,28 +264,33 @@ class TestPlots(unittest.TestCase):
         for plot_type in plot_types:
             if plot_type == 'geo_map':
                 fig = create_plot(self.geo_data, plot_type)
-                self.assertEqual(fig, 'GeoMapFigureObject')
+                self.assertIsNotNone(fig)
+                mock_geographical_map.assert_called_once_with(self.geo_data)
             elif plot_type == 'animated_scatter':
                 fig = create_plot(self.animated_data, plot_type, animation_frame='animation_frame')
-                self.assertEqual(fig, 'AnimatedScatterFigureObject')
+                self.assertIsNotNone(fig)
+                mock_animated_scatter.assert_called_once_with(self.animated_data, 'animation_frame')
             else:
                 fig = create_plot(self.data, plot_type)
+                self.assertIsNotNone(fig)
                 if plot_type == 'scatter':
-                    self.assertEqual(fig, 'ScatterFigureObject')
+                    mock_scatter_plot.assert_called_once_with(self.data)
                 elif plot_type == 'line':
-                    self.assertEqual(fig, 'LineFigureObject')
+                    mock_line_plot.assert_called_once_with(self.data)
                 elif plot_type == 'histogram':
-                    self.assertEqual(fig, 'HistogramFigureObject')
+                    mock_histogram.assert_called_once_with(self.data)
                 elif plot_type == 'box':
-                    self.assertEqual(fig, 'BoxFigureObject')
+                    mock_box_plot.assert_called_once_with(self.data)
                 elif plot_type == '3d_scatter':
-                    self.assertEqual(fig, '3DScatterFigureObject')
+                    mock_3d_scatter_plot.assert_called_once_with(self.data)
                 elif plot_type == 'combined':
-                    self.assertEqual(fig, 'CombinedFigureObject')
+                    mock_combined_plot.assert_called_once_with(self.data)
 
-    def test_create_plot_invalid_type(self):
+    @patch('my_interactive_plots.plots.create_plot')
+    def test_create_plot_invalid_type(self, mock_create_plot):
         with self.assertRaises(PlotCreationError):
             create_plot(self.data, 'invalid_type')
+        mock_create_plot.assert_not_called()
 
 if __name__ == '__main__':
     unittest.main()
